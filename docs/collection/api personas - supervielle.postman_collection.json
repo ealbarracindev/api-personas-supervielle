@@ -1,0 +1,329 @@
+{
+	"info": {
+		"_postman_id": "02d645d7-6595-4ec4-ac03-7c2ab64f8bae",
+		"name": "api personas - supervielle",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22862499"
+	},
+	"item": [
+		{
+			"name": "Personas v1",
+			"item": [
+				{
+					"name": "Relaciones",
+					"item": [
+						{
+							"name": "parentezco",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl-V1}}/personas/parentezco/1/padre/2",
+									"host": [
+										"{{baseUrl-V1}}"
+									],
+									"path": [
+										"personas",
+										"parentezco",
+										"1",
+										"padre",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "relaciones",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl-V1}}/personas/relaciones/2/6",
+									"host": [
+										"{{baseUrl-V1}}"
+									],
+									"path": [
+										"personas",
+										"relaciones",
+										"2",
+										"6"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "es padre",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl-V1}}/personas/4/padre/1",
+									"host": [
+										"{{baseUrl-V1}}"
+									],
+									"path": [
+										"personas",
+										"4",
+										"padre",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "1- Personas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl-V1}}/personas",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "2- Persona por Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl-V1}}/personas/20",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"personas",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "3- Registrar persona",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"fede\",\r\n  \"apellidos\": \"be\",\r\n  \"tipoDocumentoId\": 1,\r\n  \"documentoNro\": \"30000000\",\r\n  \"paisId\": 9,\r\n  \"tipoSexoId\": 1,\r\n  \"edad\": 38,\r\n  \"email\": \"fedebe@nerdearla.com\",\r\n  \"telefono\":\"111569871\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl-V1}}/personas",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"personas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "4-actualizar",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":20,\r\n  \"nombres\": \"fede\",\r\n  \"apellidos\": \"be3\",\r\n  \"tipoDocumentoId\": 1,\r\n  \"documentoNro\": \"10000000\",\r\n  \"paisId\": 10,\r\n  \"tipoSexoId\": 3,\r\n  \"edad\": 36,\r\n  \"email\": \"fedebe@nerdearla.com\",\r\n  \"telefono\":\"111569871\"\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl-V1}}/personas/20",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"personas",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "5-eliminar",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nombres\": \"vane\",\r\n  \"apellidos\": \"go\",\r\n  \"tipoDocumentoId\": 1,\r\n  \"documentoNro\": \"22222222\",\r\n  \"paisId\": 9,\r\n  \"tipoSexoId\": 2,\r\n  \"edad\": 35,\r\n  \"email\": \"vanego@nerdearla.com\",\r\n  \"telefono\":null\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl-V1}}/personas/4",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"personas",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "estadicticas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl-V1}}/personas/estadisticas",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"personas",
+								"estadisticas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tipos parentezcos v1",
+			"item": [
+				{
+					"name": "tipos parentezcos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl-V1}}/tiposparentezcos",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"tiposparentezcos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registrar parentezco",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"persona1Id\": 2,\r\n  \"persona2Id\": 3,\r\n  \"tipoParentezcoId\":3\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl-V1}}/tiposparentezcos/registrarparentezco",
+							"host": [
+								"{{baseUrl-V1}}"
+							],
+							"path": [
+								"tiposparentezcos",
+								"registrarparentezco"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "healt checks self",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/health",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "healt checks dependencies",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{baseUrl}}/health-dependencies",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"health-dependencies"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl-V1",
+			"value": "https://localhost:5001/api/v1.0",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://localhost:5001/api",
+			"type": "string"
+		}
+	]
+}
