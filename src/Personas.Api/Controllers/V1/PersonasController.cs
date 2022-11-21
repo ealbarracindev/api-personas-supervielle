@@ -3,7 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 using Personas.Api.Core.Dtos;
 using Personas.Api.Core.Entities;
 using Personas.Api.Core.Exceptions;
+using Personas.Api.Core.Filters;
 using Personas.Api.Core.Interfaces;
+using Personas.Api.Infrastructure.Helpers;
 
 namespace Personas.Api.Controllers.V1
 {
@@ -14,17 +16,24 @@ namespace Personas.Api.Controllers.V1
     {
         private readonly IPersonaServices personaServices;
         private readonly IMapper mapper;
-        public PersonasController(IPersonaServices personaServices, IMapper mapper)
+        private readonly IUriService uriService;
+        public PersonasController(IPersonaServices personaServices, IMapper mapper, IUriService uriService)
         {
             this.personaServices = personaServices;
             this.mapper = mapper;
+            this.uriService = uriService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> Personas() 
+        public async Task<IActionResult> Personas([FromQuery] PaginationFilter filter) 
         {
-            var resp =  await personaServices.GetPersonasAsync();
-            return Ok(mapper.Map<IEnumerable<PersonaDto>>(resp));
+            var route = Request.Path.Value;
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            var resp =  await personaServices.GetPersonasAsync(validFilter);
+            var pagedData = mapper.Map<List<PersonaDto>>(resp);
+            var totalRecords = await personaServices.CountAsync();
+            var pagedReponse = PaginationHelper.CreatePagedReponse<PersonaDto>(pagedData, validFilter, totalRecords, uriService, route);
+            return Ok(pagedReponse);
         }
         
         [HttpGet("{id}")]

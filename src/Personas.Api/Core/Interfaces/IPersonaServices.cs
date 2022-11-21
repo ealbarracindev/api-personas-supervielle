@@ -1,12 +1,14 @@
 ﻿
 using Personas.Api.Core.Entities;
 using Personas.Api.Core.EntitiesSP;
+using Personas.Api.Core.Filters;
 
 namespace Personas.Api.Core.Interfaces
 {
     public interface IPersonaServices
     {
-        Task<IEnumerable<Persona>> GetPersonasAsync();
+        Task<IEnumerable<Persona>> GetPersonasAsync(PaginationFilter filter);
+        Task<int> CountAsync();
         Task<Persona> GetPersonaAsync(int id);
         Task<PersonaEstadisticaSP> GetEstadisticaAsync();
         Task<Persona> RegisterPersonaAsync(Persona persona);

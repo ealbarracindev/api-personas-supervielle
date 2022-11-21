@@ -1,5 +1,7 @@
+using Personas.Api.Core.Interfaces;
 using Personas.Api.Infrastructure.Extensions;
 using Personas.Api.Infrastructure.Middlewares;
+using Personas.Api.Infrastructure.Services;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder();
@@ -52,6 +54,15 @@ builder.Services.AddCustomHealthChecks(builder.Configuration);
 
 // Register and Configure API versioning
 builder.Services.AddCustomApiVersioning();
+
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddSingleton<IUriService>(o =>
+{
+    var accessor = o.GetRequiredService<IHttpContextAccessor>();
+    var request = accessor.HttpContext.Request;
+    var uri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+    return new UriService(uri);
+});
 
 var app = builder.Build();
 

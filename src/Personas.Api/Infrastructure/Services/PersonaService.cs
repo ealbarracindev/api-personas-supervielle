@@ -2,8 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Personas.Api.Core.Entities;
 using Personas.Api.Core.EntitiesSP;
+using Personas.Api.Core.Filters;
 using Personas.Api.Core.Interfaces;
 using Personas.Api.Infrastructure.Context;
+using Personas.Api.Infrastructure.Helpers;
+using Personas.Api.Infrastructure.Responses;
 
 namespace Personas.Api.Infrastructure.Services
 {
@@ -18,14 +21,31 @@ namespace Personas.Api.Infrastructure.Services
             
         }
 
-        public async Task<IEnumerable<Persona>> GetPersonasAsync()
+        public async Task<IEnumerable<Persona>> GetPersonasAsync(PaginationFilter validFilter)
         {
             return await _context.Personas
                             .Include(x => x.Pais)
                             .Include(x => x.TipoDocumento)
                             .Include(x => x.TipoSexo)
+                            .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                            .Take(validFilter.PageSize)
                             .ToListAsync();
         }
+        public async Task<IEnumerable<Persona>> GetPersonasPaginationsAsync(PaginationFilter filter)
+        {
+            var validFilter = new PaginationFilter(filter.PageNumber, filter.PageSize);
+            return await _context.Personas
+                            .Include(x => x.Pais)
+                            .Include(x => x.TipoDocumento)
+                            .Include(x => x.TipoSexo)
+                            .Skip((validFilter.PageNumber - 1) * validFilter.PageSize)
+                            .Take(validFilter.PageSize)
+                            .ToListAsync();
+
+
+        }
+
+        public async Task<int> CountAsync() => await _context.Personas.CountAsync();
 
         public async Task<Persona> GetPersonaAsync(int id)
         {
